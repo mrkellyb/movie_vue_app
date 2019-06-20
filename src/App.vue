@@ -2,11 +2,42 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+
+      <span v-if="isLoggedIn()">
+      <router-link to="/logout">Logout</router-link> |
+      </span>
+
+      <span v-else>
+      <router-link to="/signup">Signup</router-link> |
+      <router-link to="/login">Login</router-link> |
+      </span>
+      <router-link to="/movies">Movie Index</router-link> |
+      <router-link to="/movies/new">Add A Movie</router-link>
+
+ 
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  created: function() {
+  },
+  methods: {
+    isLoggedIn: function() {
+      if (localStorage.getItem('jwt')) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+};
+
+</script>
+
 
 <style>
 #app {
@@ -29,3 +60,4 @@
   color: #42b983;
 }
 </style>
+
